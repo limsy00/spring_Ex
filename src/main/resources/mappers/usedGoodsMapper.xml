@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.example.lesson02.mapper.UsedGoodsMapper"> <!-- 어느 인터페이스에 맵핑되는가? 주소작성 -->
+ 	<select id="selectUsedGoodsList" resultType="com.example.lesson02.domain.UsedGoods"> <!-- 어느 메소드를 수행할 것인가? -->
+ 		SELECT
+ 			*
+ 		FROM
+ 			`used_goods`
+ 	</select>
+ </mapper>
