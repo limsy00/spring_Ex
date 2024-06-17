@@ -6,8 +6,9 @@
  <mapper namespace="com.example.lesson03.mapper.ReviewMapper">
  	<!-- resultType: Review(단건) 어디에 담을 건가? -->
  	<!-- parameterType: 어떤 타입으로 들어오는가? #{동적퀴리}-->
- 	<select id="selectReviewById" resultType="com.example.lesson03.domain.Review" parameterType="int">  
- 		
+ 	
+ 	<!-- ● Ex01 -->
+ 	<select id="selectReviewById" resultType="com.example.lesson03.domain.Review" parameterType="int">  		
  		<!-- select * 을 하지 않은 이유
  		: DB에서 코드 수정(삭제,추가)이 이루어졌을 때, WAS에선 전체를 조회하기 때문에 수정되기 이전의 데이터가 남아있을 수 있기 때문에 오류 위험 -->
  		SELECT
@@ -24,4 +25,65 @@
  		WHERE
  			`id` = #{id} <!-- 동적 쿼리 : 늘 값이 바뀜 -->
  	</select>
+ 	
+ 	<!-- ● Ex02_1 -->
+ 	<!-- parameterType으로 오는게 도메인의 Review 이다.
+ 		=> public int addReview(Review review){} -->
+ 	<insert id="insertReview" parameterType="com.example.lesson03.domain.Review"> 
+ 		INSERT INTO `new_review`
+ 		( 
+ 		<!-- `id`는 자동으로 입력되기 때문에 빼기 -->
+ 			`storeId`
+			,`menu`
+			,`userName`
+			,`point`
+			,`review`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{storeId}
+			, #{menu}
+			, #{userName}
+			, #{point}
+			, #{review}
+			, NOW()
+			, NOW()
+ 		)
+ 	</insert>
+ 	<!-- ● Ex02_2 -->
+ 	<insert id="insertReviewAsField" parameterType="map">
+ 		INSERT INTO `new_review`
+ 		( 
+ 			`storeId`
+			,`menu`
+			,`userName`
+			,`point`
+			,`review`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{storeId}
+			, #{menu}
+			, #{userName}
+			, #{point}
+			, #{review}
+			, NOW()
+			, NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<!-- ● Ex03_1 -->
+ 	<update id="updateReviewById" parameterType="map">
+ 		UPDATE `new_review`
+ 		SET
+ 			`review` = #{review}
+ 			, `updatedAt` = NOW() <!-- 업데이트 시간까지 업로드 -->
+ 		WHERE
+ 			`id`= #{id}
+ 	</update>
  </mapper>
+ 
