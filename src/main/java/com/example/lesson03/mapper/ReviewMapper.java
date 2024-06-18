@@ -26,4 +26,7 @@ public interface ReviewMapper {
 	public int updateReviewById(
 			@Param("id") int id, 
 			@Param("review") String review);
+	
+	// ●Ex04 - 리턴 타입은 BO 마음 (int / void)
+	public int deleteReviewById(int id);
 }

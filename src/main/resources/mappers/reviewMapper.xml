@@ -76,14 +76,24 @@
  		)
  	</insert>
  	
- 	<!-- ● Ex03_1 -->
+ 	<!-- ● Ex03 -->
  	<update id="updateReviewById" parameterType="map">
- 		UPDATE `new_review`
- 		SET
- 			`review` = #{review}
- 			, `updatedAt` = NOW() <!-- 업데이트 시간까지 업로드 -->
- 		WHERE
- 			`id`= #{id}
- 	</update>
+		UPDATE `new_review`
+		SET
+			`review` = #{review}
+			, `updatedAt` = NOW()
+		WHERE
+			`id` = #{id}
+	</update>
+ 	
+ 	<!-- ● Ex04 -->
+ 	<delete id="deleteReviewById" parameterType="int">
+		DELETE
+		FROM
+			`new_review`
+		WHERE
+			`id` = #{id}
+	</delete>
+ 	
  </mapper>
  

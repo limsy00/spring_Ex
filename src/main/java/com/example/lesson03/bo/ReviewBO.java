@@ -26,7 +26,7 @@ public class ReviewBO {
 	public int addReview(Review review) {
 		return reviewMapper.insertReview(review);
 	}
-	/* ● 방법2
+	/* ○ 방법2
 	 * public void addReview(Review review) { int count =
 	 * reviewMapper.insertReview(review); }
 	 */
@@ -43,4 +43,12 @@ public class ReviewBO {
 	public int updateReviewById(int id, String review) {
 		return reviewMapper.updateReviewById(id, review);
 	}
+	
+	// ● Ex04
+	// input: id
+	// output: X
+	public void deleteReviewById(int id) {
+		reviewMapper.deleteReviewById(id);
+	}
+	
  }
