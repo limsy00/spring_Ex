@@ -1,6 +1,10 @@
 package com.example.lesson05;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,5 +52,25 @@ public class Lesson05Controller {
 		model.addAttribute("users", users); // -> 총 2명 model에 담기
 		
 		return "lesson05/ex02";
+	}
+	
+	@GetMapping("/ex03")
+	public String ex03(Model model) {
+		Date date = new Date();
+		model.addAttribute("date", date);
+		
+		// 시분초 X
+		LocalDate localDate = LocalDate.now(); // static, class 메모리에 담아 뒀기에 new X
+		model.addAttribute("localDate", localDate);
+		
+		// 시분초 O
+		LocalDateTime localDateTime = LocalDateTime.now();
+		model.addAttribute("localDateTime", localDateTime);
+		
+		// UTC 표준시
+		ZonedDateTime zondeDateTime = ZonedDateTime.now();
+		model.addAttribute("zondeDateTime", zondeDateTime);
+		
+		return "lesson05/ex03";
 	}
 }
