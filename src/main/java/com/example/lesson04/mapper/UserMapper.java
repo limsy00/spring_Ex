@@ -14,4 +14,7 @@ public interface UserMapper {
 			@Param("introduce") String introduce);
 	
 	public User selectLatestUser();
+	
+	// Lesson06Ex02Controller - AJAX로 아이디 중복확인 
+	public boolean isDuplicationByName(String name); // 특수한 경우로, 이름 BO와 동일하게 설정 가능
 }

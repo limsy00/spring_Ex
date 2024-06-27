@@ -38,4 +38,15 @@
 		ORDER BY `id` DESC
 		LIMIT 1	
  	</select>
+ 	
+ 	<!-- Lesson06Ex02Controller - AJAX로 아이디 중복확인 쿼리 -->
+ 	<select id="isDuplicationByName" parameterType="string" resultType="boolean">
+ 	<!-- count 결과 값을 boolean으로?? [10진수: 0이 아니면 true, 0이면 false] -->
+ 		SELECT
+	 		COUNT(*)
+		FROM 
+			`new_user`
+		WHERE 
+			`name` = #{name}
+ 	</select>
  </mapper>

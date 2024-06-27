@@ -25,4 +25,10 @@ public class UserBO {
 	public User getLatestUser() {
 		return userMapper.selectLatestUser();
 	}
+	
+	// Lesson06Ex02Controller - AJAX로 아이디 중복확인
+	// input : name,  output : boolean
+	public boolean isDuplicationByName(String name) {
+		return userMapper.isDuplicationByName(name);
+	}
 }

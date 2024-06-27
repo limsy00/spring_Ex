@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Ex02 회원가입</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>회원가입2</h1>
+		<div class="form-group">
+			<label for="name">이름</label> 
+			<div class="d-flex">
+				<input type="text" id="name" name="name" class="form-control col-4">
+				<button type="button" id="nameCheckBtn" class="btn btn-warning">중복확인</button>
+			</div>
+			
+			<small id="nameStatusArea"><!-- 중복 --></small>
+		</div>
+		<input type="button" id="joinBtn" value="회원가입" class="btn btn-success">
+	</div>
+	
+	<script>
+		$(document).ready(function() {
+			// ① 중복확인 버튼 click
+			$("#nameCheckBtn").on('click', function() {
+				//alert("중복확인 click");
+				
+				let name = $("#name").val().trim();
+				if (!name) {
+					// <small>태그 안쪽으로 .append가 들어감 -> but 무한생성 
+					$("#nameStatusArea").empty(); // -> nameStatusArea 초기화(자식 태그 모두 비우기)!!
+					
+					$("#nameStatusArea").append('<span class="text-danger">이름이 비어있습니다.</span>');
+					return;
+    			}
+				
+				// dB에서 AJAX 중복 확인
+				$.ajax({
+					// request
+    				type:"GET" // -> 사실 'GET'이면 생략 가능
+    				, url:"/lesson06/ex02/is-duplication-name"
+    				, data:{"name":name}
+    				
+    				// response
+    				// callback 함수
+    				, success:function(data) { // 응답값 : 변경된 js dictionary
+    					//alert(data);
+    					// {"code":200, "is_duplication":true} => 중복
+    					
+    					if (data.is_duplication) {
+    						$("#nameStatusArea").append('<span class="text-danger">중복된 이름입니다.</span>');
+    						return;
+    					}
+    				}
+    				, error:function(error) {
+    					alert("이름 중복확인에 실패했습니다.");
+    				}
+				});
+				
+			}); // ① nameCheckBtn click
+			
+			// ② 회원가입
+			$("#joinBtn").on('click', function() {
+				//alert("회원가입 click");
+				let children = $("#nameStatusArea").children(); 
+				console.log(children); // 자식요소 확인
+				
+				// nameStatusArea에 자식 태그가 아무것도 없으면 가입 진행
+				if (children.length < 1) {
+					alert("● 가입 진행 ●");
+				} else {
+					alert("※가입 불가※");
+				}
+				
+			}); // ② joinBtn click
+		});	// ready
+		
+	</script>
+</body>
+</html>
