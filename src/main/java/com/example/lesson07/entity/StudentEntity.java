@@ -20,7 +20,7 @@ import lombok.ToString;
 @Entity // 이 객체는 엔티티다. BO-JPA-DB
 @Table(name="new_student") // 테이블 이름: StudentEntity(X), new_student(O)
 @Getter
-@Builder // setter 대신 많이 사용
+@Builder(toBuilder = true) // setter 대신 많이 사용(업데이트는 불가) -> toBuilder = true : 필드 수정 허용
 // jpa는 반드시 2개의 생성자 필요
 @NoArgsConstructor // (파라미터 X)기본 생성자
 @AllArgsConstructor // (모든 파라미터 존재)생성자

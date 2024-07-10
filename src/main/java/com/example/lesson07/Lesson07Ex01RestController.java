@@ -23,7 +23,23 @@ public class Lesson07Ex01RestController {
 		String email = "jina@naver.com";
 		String dreamJob = "간호사";
 		
+		// save 된 객체를 리턴하므로 id값이 채워져 있다.
 		return studentBO.addStudent(name, phoneNumber, email, dreamJob);
+	}
+	
+	// U: Update
+	@GetMapping("/ex01/update")
+	public StudentEntity update() {
+		// id가 7번인 dreamJob 변경
+		return studentBO.updateStudentDreamJobById(7, "기획자");
+	}
+	
+	// D: Delete
+	@GetMapping("/ex01/delete")
+	public String delete() {
+		// id:6 삭제
+		studentBO.deleteStudentById(6);
+		return "삭제 완료";
 	}
 }
 
